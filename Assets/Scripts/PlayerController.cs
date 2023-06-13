@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
    
     public float speed = 5.0f;
     private Rigidbody rb;
-    private int pickupCount; 
+    private int pickupCount;
+    private Timer timer;
     
 
    
@@ -19,6 +20,9 @@ public class PlayerController : MonoBehaviour
         pickupCount = GameObject.FindGameObjectsWithTag("Pick Up").Length;
         // run check pickups function
         CheckPickups();
+        // get the timer object
+        timer = FindObjectOfType<Timer>();
+        timer.StartTimer(); 
     }
 
     
@@ -41,7 +45,7 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             //Decrament the pickup count 
             pickupCount -= 1;
-            // run chack pickups function
+            // run check pickups function
             CheckPickups();
         }
     }
@@ -52,7 +56,8 @@ public class PlayerController : MonoBehaviour
 
         if (pickupCount == 0)
         {
-            print("Yay! You killed them all!");
+            timer.StopTimer();
+            print("Yay! You killed them all! Your time was: " + timer.GetTime());
         }
     }
 }
