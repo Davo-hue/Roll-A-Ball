@@ -12,7 +12,11 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private int pickupCount;
     private Timer timer;
-    private bool gameOver = false; 
+    private bool gameOver = false;
+    GameObject resetPoint;
+    bool resetting = false;
+    Color originalColour;
+    
 
     [Header("UI")]
     public GameObject inGamePanel;
@@ -26,17 +30,15 @@ public class PlayerController : MonoBehaviour
     void Start()            
     {
         rb = GetComponent<Rigidbody>();
-        // Get the number of pickups in our scene
         pickupCount = GameObject.FindGameObjectsWithTag("Pick Up").Length;
-        // run check pickups function
         SetCountText();
-        // get the timer object
         timer = FindObjectOfType<Timer>();
-        timer.StartTimer(); 
-        // turn on in game panel
+        timer.StartTimer();
+        Time.timeScale = 1;
         inGamePanel.SetActive(true);    
-        // turn off our win panel
-        GameOverPanel.SetActive(false);   
+        GameOverPanel.SetActive(false);
+        resetPoint = GameObject.Find("Reset Point");
+        originalColour = GetComponent<Renderer>().material.color;
     }
 
     void Update()
@@ -46,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (gameOver == true)
+        if (resetting)
             return;
 
         float moveHorizontal = Input.GetAxis("Horizontal");
@@ -84,17 +86,11 @@ public class PlayerController : MonoBehaviour
 
     void WinGame()
     {
-        //set game over to true
         gameOver = true;
-        // stop the timer 
         timer.StopTimer();
-        //Turn on our win panel
         GameOverPanel.SetActive(true);
-        // turn off our ingame panel
         inGamePanel.SetActive(false);
-        // display the timer on the win time text
         winTimeText.text = "Your time was: " + timer.GetTime().ToString("F2");
-        //set valocity to rigid body to 0
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
@@ -110,5 +106,34 @@ public class PlayerController : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Respawn"))
+        {
+            StartCoroutine(ResetPlayer());
+        }
+
+    }
+
+    public IEnumerator ResetPlayer()
+
+    {
+        resetting = true;
+        GetComponent<Renderer>().material.color = Color.black;
+        rb.velocity = Vector3.zero;
+        Vector3 startPos = transform.position;
+        float resetSpeed = 2f;
+        var i = 0.0f;
+        var rate = 1.0f / resetSpeed;
+        while (i < 1.0f)
+        {
+            i += Time.deltaTime * rate;
+            transform.position = Vector3.Lerp(startPos, resetPoint.transform.position, i);
+            yield return null;
+        }
+        GetComponent<Renderer>().material.color = originalColour;
+        resetting = false;
     }
 }
