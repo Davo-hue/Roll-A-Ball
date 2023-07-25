@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("UI")]
     public GameObject inGamePanel;
-    public GameObject winPanel;
+    public GameObject GameOverPanel;
     public TMP_Text scoreText;
     public TMP_Text timerText;
     public TMP_Text winTimeText;
@@ -29,14 +29,14 @@ public class PlayerController : MonoBehaviour
         // Get the number of pickups in our scene
         pickupCount = GameObject.FindGameObjectsWithTag("Pick Up").Length;
         // run check pickups function
-        CheckPickups();
+        SetCountText();
         // get the timer object
         timer = FindObjectOfType<Timer>();
         timer.StartTimer(); 
         // turn on in game panel
         inGamePanel.SetActive(true);    
         // turn off our win panel
-        winPanel.SetActive(false);   
+        GameOverPanel.SetActive(false);   
     }
 
     void Update()
@@ -67,11 +67,11 @@ public class PlayerController : MonoBehaviour
             //Decrament the pickup count 
             pickupCount -= 1;
             // run check pickups function
-            CheckPickups();
+            SetCountText();
         }
     }
 
-    void CheckPickups()
+    void SetCountText()
     {
         //display amount of pickups left
         scoreText.text = "PickUps left: " + pickupCount;
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         // stop the timer 
         timer.StopTimer();
         //Turn on our win panel
-        winPanel.SetActive(true);
+        GameOverPanel.SetActive(true);
         // turn off our ingame panel
         inGamePanel.SetActive(false);
         // display the timer on the win time text
