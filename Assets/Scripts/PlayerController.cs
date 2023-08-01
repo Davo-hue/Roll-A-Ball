@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 5.0f;
     private Rigidbody rb;
     private int pickupCount;
+    public int count;
     private Timer timer;
     private bool gameOver = false;
     GameObject resetPoint;
@@ -31,6 +32,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         pickupCount = GameObject.FindGameObjectsWithTag("Pick Up").Length;
+                    
+        count = 0;
         SetCountText();
         timer = FindObjectOfType<Timer>();
         timer.StartTimer();
@@ -65,6 +68,7 @@ public class PlayerController : MonoBehaviour
     {
         if(other.tag == "Pick Up")
         {
+            other.GetComponent<Particles>().CreateParticles();
             Destroy(other.gameObject);
             //Decrament the pickup count 
             pickupCount -= 1;
@@ -135,5 +139,12 @@ public class PlayerController : MonoBehaviour
         }
         GetComponent<Renderer>().material.color = originalColour;
         resetting = false;
+
+       
+    }
+    public void ObjectFall()
+    {
+        count += 1;
+        SetCountText();
     }
 }
