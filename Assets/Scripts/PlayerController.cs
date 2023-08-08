@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
     public TMP_Text scoreText;
     public TMP_Text timerText;
     public TMP_Text winTimeText;
+
+    GameController gameController;
+    
     
 
    
@@ -42,6 +45,11 @@ public class PlayerController : MonoBehaviour
         GameOverPanel.SetActive(false);
         resetPoint = GameObject.Find("Reset Point");
         originalColour = GetComponent<Renderer>().material.color;
+
+        gameController = FindObjectOfType<GameController>();
+        timer = FindObjectOfType<Timer>();
+        if (gameController.gameType == GameType.SpeedRun)
+            StartCoroutine(timer.StartCountdown()); 
     }
 
     void Update()
@@ -59,7 +67,9 @@ public class PlayerController : MonoBehaviour
 
         Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
         rb.AddForce(movement * speed);
-        
+
+        if (gameController.gameType == GameType.SpeedRun && !timer.IsTiming())
+            return;
     }
 
     
@@ -97,6 +107,9 @@ public class PlayerController : MonoBehaviour
         winTimeText.text = "Your time was: " + timer.GetTime().ToString("F2");
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+
+        if (gameController.gameType == GameType.SpeedRun)
+            timer.StopTimer();
 
 
     }
