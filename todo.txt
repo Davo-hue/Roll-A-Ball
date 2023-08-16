@@ -1,0 +1,14 @@
+-slow ball
+-pause player at end and in countdown
+-change fonts (heavy metal speedrun)
+-change ball and pickups to sprites
+
+
+
+create level 1
+-link up from start screen
+
+AT HOME
+level 1
+boss room
+teleport player to boss fight

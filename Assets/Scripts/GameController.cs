@@ -22,12 +22,13 @@ public class GameController : MonoBehaviour
         }
     }
 
-   
+   //sets the game type from our selections 
     public void SetGameType(GameType _gameType)
     {
         gameType = _gameType;
     }
 
+    // to toggle between speedrun on or off
     public void ToggleSpeedRun (bool _speedRun)
     {
         if (_speedRun)

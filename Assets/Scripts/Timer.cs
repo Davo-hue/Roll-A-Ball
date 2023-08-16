@@ -79,7 +79,7 @@ public class Timer : MonoBehaviour
         {
             bestTime = currentTime;
             PlayerPrefs.SetFloat("BestTime" + sceneController.GetSceneName(), bestTime);
-            bestTimeResults.text = bestTime.ToString("F3") + " !! NEW BEST !!";
+            bestTimeResults.text = bestTime.ToString("F3");
         }
     }
 

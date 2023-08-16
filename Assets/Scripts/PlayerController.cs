@@ -26,7 +26,9 @@ public class PlayerController : MonoBehaviour
     public TMP_Text timerText;
     public TMP_Text winTimeText;
 
+   //controllers
     GameController gameController;
+     
     
     
 
@@ -104,7 +106,7 @@ public class PlayerController : MonoBehaviour
         timer.StopTimer();
         GameOverPanel.SetActive(true);
         inGamePanel.SetActive(false);
-        winTimeText.text = "Your time was: " + timer.GetTime().ToString("F2");
+        winTimeText.text = "Your Time ";
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
@@ -125,7 +127,7 @@ public class PlayerController : MonoBehaviour
         Application.Quit();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(UnityEngine.Collision collision)
     {
         if(collision.gameObject.CompareTag("Respawn"))
         {
