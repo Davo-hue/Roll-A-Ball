@@ -1,14 +1,29 @@
--slow ball
--pause player at end and in countdown
+
+Need:
+
+-chase only at spawn
+
+
+-pause player at end and in countdown 
+                           (three sec, only on count)
+-blood decal
+
+
+Build:
+corner points
+single wall
+
+
+
+if i have time:
+
+-change controller
+
+- boss title and health bar
+(only two hits)
+
+-change camera view when enter boss area
+
 -change fonts (heavy metal speedrun)
--change ball and pickups to sprites
 
-
-
-create level 1
--link up from start screen
-
-AT HOME
-level 1
-boss room
-teleport player to boss fight
+-clean up (motion, hit box, tittle screen ect,boss)

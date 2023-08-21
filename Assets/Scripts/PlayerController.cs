@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
    //controllers
     GameController gameController;
-     
+    SoundController soundController;
     
     
 
@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
         timer = FindObjectOfType<Timer>();
         if (gameController.gameType == GameType.SpeedRun)
             StartCoroutine(timer.StartCountdown()); 
+        soundController = FindObjectOfType<SoundController>();
     }
 
     void Update()
@@ -86,6 +87,14 @@ public class PlayerController : MonoBehaviour
             pickupCount -= 1;
             // run check pickups function
             SetCountText();
+            soundController.PlayPickupSound();
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+       if (collision.gameObject.CompareTag("Wall"))
+        {
+            soundController.PlayCollisionSound(collision.gameObject);
         }
     }
 
@@ -112,6 +121,8 @@ public class PlayerController : MonoBehaviour
 
         if (gameController.gameType == GameType.SpeedRun)
             timer.StopTimer();
+
+        soundController.PlayWinSound();
 
 
     }
