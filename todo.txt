@@ -1,17 +1,21 @@
 
 Need:
 
--chase only at spawn
-
-
 -pause player at end and in countdown 
                            (three sec, only on count)
--blood decal
 
+-clean up (motion, hit box, tittle screen ect,boss)
+
+-edit sound
 
 Build:
 corner points
 single wall
+
+
+Wensday:
+-fix up boss area
+-chase only at spawn
 
 
 
@@ -26,4 +30,6 @@ if i have time:
 
 -change fonts (heavy metal speedrun)
 
--clean up (motion, hit box, tittle screen ect,boss)
+
+
+-blood decal

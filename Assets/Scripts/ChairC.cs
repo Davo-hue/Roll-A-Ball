@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collision : MonoBehaviour
+public class ChairC : MonoBehaviour
 {
    bool knockedOver = false;
     PlayerController playerController;

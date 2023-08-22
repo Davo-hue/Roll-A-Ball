@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
         timer = FindObjectOfType<Timer>();
         if (gameController.gameType == GameType.SpeedRun)
             StartCoroutine(timer.StartCountdown()); 
-        soundController = FindObjectOfType<SoundController>();
+        //soundController = FindObjectOfType<SoundController>();
     }
 
     void Update()
@@ -65,14 +65,16 @@ public class PlayerController : MonoBehaviour
         if (resetting)
             return;
 
+        if (gameController.gameType == GameType.SpeedRun && !timer.IsTiming())
+            return;
+
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
         rb.AddForce(movement * speed);
 
-        if (gameController.gameType == GameType.SpeedRun && !timer.IsTiming())
-            return;
+        
     }
 
     
@@ -87,14 +89,14 @@ public class PlayerController : MonoBehaviour
             pickupCount -= 1;
             // run check pickups function
             SetCountText();
-            soundController.PlayPickupSound();
+            //soundController.PlayPickupSound();
         }
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(ChairC collision)
     {
        if (collision.gameObject.CompareTag("Wall"))
         {
-            soundController.PlayCollisionSound(collision.gameObject);
+            //soundController.PlayCollisionSound(collision.gameObject);
         }
     }
 
@@ -122,7 +124,7 @@ public class PlayerController : MonoBehaviour
         if (gameController.gameType == GameType.SpeedRun)
             timer.StopTimer();
 
-        soundController.PlayWinSound();
+        //soundController.PlayWinSound();
 
 
     }

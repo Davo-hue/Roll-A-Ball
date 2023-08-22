@@ -49,6 +49,8 @@ public class Timer : MonoBehaviour
         else
             bestTime = 1000f;
 
+        timing = false;
+        timerText.text = "0:00";
         countdownPanel.SetActive(true);
         countdownText.text = "3";
         yield return new WaitForSeconds(1);

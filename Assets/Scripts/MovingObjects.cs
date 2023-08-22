@@ -38,8 +38,12 @@ public class MovingObjects : MonoBehaviour
 
     }
 
-    
-    private void OnCollisionEnter(Collision collision)
+    //private void OnCollisionEnter(UnityEngine.Collision collision)
+    //{
+        
+    //}
+
+    private void OnCollisionEnter(ChairC collision)
     {
         
         if(collision.gameObject.CompareTag("Player"))
