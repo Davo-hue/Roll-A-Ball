@@ -9,6 +9,9 @@ public class EnemyPathfind : MonoBehaviour
 
     public NavMeshAgent navAgent;
     public GameObject player;
+
+   
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +21,14 @@ public class EnemyPathfind : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        navAgent.SetDestination(player.transform.position);
+        if(player.GetComponent<PlayerController>().canFollow == true)
+        {
+            navAgent.SetDestination(player.transform.position);
+        }
+        else
+        {
+            return;
+        }
+
     }
 }

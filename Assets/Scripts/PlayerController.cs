@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     GameObject resetPoint;
     bool resetting = false;
     Color originalColour;
-    
+    public bool canFollow;
 
     [Header("UI")]
     public GameObject inGamePanel;
@@ -91,6 +91,12 @@ public class PlayerController : MonoBehaviour
             SetCountText();
             //soundController.PlayPickupSound();
         }
+        if(other.tag == "Teleporter")
+        {
+            canFollow = true;
+        }
+   
+        
     }
     private void OnCollisionEnter(ChairC collision)
     {
